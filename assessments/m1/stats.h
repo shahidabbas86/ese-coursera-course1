@@ -9,19 +9,26 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
+ * @file <stats.h> 
  * @brief <Add Brief Description Here >
  *
  * <Add Extended Description Here>
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author <Shahid Abbas>
+ * @date <01.10.2017>
  *
  */
 #ifndef __STATS_H__
 #define __STATS_H__
 
 /* Add Your Declarations and Function Comments here */ 
+void print_statistics(int min, int max, int mean, int median);
+void print_array (unsigned char *ptr, int size);
+int find_median(unsigned char *ptr, int size);
+int find_mean(unsigned char *ptr, int size);
+unsigned char find_maximum(unsigned char *ptr, int size);
+unsigned char find_minimum(unsigned char *ptr, int size);
+void sort_array(unsigned char *ptr, int size);
 
 /**
  * @brief <Add Brief Description of Function Here>

@@ -9,16 +9,15 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
+ * @file <stats.c> 
  * @brief <Add Brief Description Here >
  *
  * <Add Extended Description Here>
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author <Shahid Abbas>
+ * @date <01.10.2017>
  *
  */
-
 
 
 #include <stdio.h>
@@ -36,8 +35,137 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   /* Other Variable Declarations Go Here */
+	int min, max, mean, median;
+
   /* Statistics and Printing Functions Go Here */
+	print_array(test, SIZE);
+	min = find_minimum(test, SIZE);
+//	printf("minimum: %u \n", min);
+	max = find_maximum(test, SIZE);
+//	printf("maxium: %u \n", max);
+	mean = find_mean(test, SIZE);
+//	printf("mean: %u \n", mean);
+	median = find_median(test, SIZE);
+//	printf("median: %u \n", median);
+	print_statistics(min, max, mean, median);
+	sort_array(test, SIZE);
+	print_array(test, SIZE);
 
 }
 
 /* Add other Implementation File Code Here */
+void print_array(unsigned char *ptr, int size)
+{	
+	int i;
+	for ( i = 0; i< size; i++)
+		printf("Array element [%d] : %u \n", i, *(ptr+i));
+	printf("********************************************\n");
+}
+
+void sort_array(unsigned char *ptr, int size)
+{
+	int i, j; 
+        unsigned char temp;
+   
+	for (i = 0; i < size; ++i)
+	{
+		for (j = i + 1; j < size; ++j)
+		{
+		    if (*(ptr+i) < *(ptr+j))
+		    {
+		        temp = *(ptr+i);
+		        *(ptr+i) = *(ptr+j);
+		        *(ptr+j)= temp;
+		   }
+		}
+	 }
+
+}
+
+unsigned char find_minimum(unsigned char *ptr, int size)
+{
+	int i, j; 
+        unsigned char minimum;
+   
+	for (i = 0; i < size; ++i)
+	{
+		for (j = i + 1; j < size; ++j)
+		{
+		    if (*(ptr+i) < *(ptr+j))
+		    {
+		        minimum = *(ptr+i);
+			*(ptr+i) = *(ptr+j);
+		        *(ptr+j)= minimum;
+		   }
+		}
+	 }
+	return minimum;
+}
+
+unsigned char find_maximum(unsigned char *ptr, int size)
+{
+	int i, j; 
+        unsigned char maximum;
+   
+	for (i = 0; i < size; ++i)
+	{
+		for (j = i + 1; j < size; ++j)
+		{
+		    if (*(ptr+i) > *(ptr+j))
+		    {
+		        maximum = *(ptr+i);
+			*(ptr+i) = *(ptr+j);
+		        *(ptr+j)= maximum;
+		   }
+		}
+	 }
+	return maximum;
+}
+
+int find_mean(unsigned char *ptr, int size)
+{
+	int i; 
+        float mean = 0;
+	for (i = 0; i < size; ++i)
+	{
+		mean = mean + *(ptr+i);
+	}
+	mean = mean/size;
+	return mean;
+}
+
+int find_median(unsigned char *ptr, int size)
+{
+	int i, j; 
+        unsigned char temp;
+   
+	for (i = 0; i < size; ++i)
+	{
+		for (j = i + 1; j < size; ++j)
+		{
+		    if (*(ptr+i) < *(ptr+j))
+		    {
+		        temp = *(ptr+i);
+		        *(ptr+i) = *(ptr+j);
+		        *(ptr+j)= temp;
+		   }
+		}
+	 }
+	if(size%2==0) 
+        	return((*(ptr+size/2) + *(ptr+size/2 - 1)) / 2);
+	else
+       		return *(ptr+size/2);
+}
+
+void print_statistics(int min, int max, int mean, int median)
+{
+	printf("Array Statistics\n");
+	printf("Minimum: %u \n", min);
+	
+	printf("Maxium: %u \n", max);
+	
+	printf("Mean: %u \n", mean);
+	
+	printf("Median: %u \n", median);
+	printf("********************************************\n");
+}
